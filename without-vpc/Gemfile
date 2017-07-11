@@ -1,0 +1,3 @@
+source 'https://rubygems.org'
+
+gem 'terraforming', git: 'https://github.com/dtan4/terraforming.git', branch: 'master'
