@@ -19,7 +19,6 @@ variable "project" {
 variable "vpc_cidr_block" {
   default = {
     alpha = "10.112"
-    sit   = "10.111"
     beta  = "10.110"
     prod  = "10.109"
   }
@@ -57,8 +56,7 @@ variable "amis" {
 variable "iam_instance_profile" {
   default = {
     alpha = "pcloud_alpha"
-    sit   = ""
-    beta  = ""
+    beta  = "pcloud_beta"
     prod  = ""
   }
 }
@@ -67,8 +65,7 @@ variable "key_name" {
   description = "Name of AWS key pair"
   default = {
     alpha = "pcloud-alpha-201706301731"
-    sit   = ""
-    beta  = ""
+    beta  = "pcloud-beta-201707271147"
     prod  = ""
   }
 }
@@ -76,8 +73,7 @@ variable "key_name" {
 variable "sg-web-server" {
   default = {
     alpha = "sg-16cf5d72"
-    sit   = ""
-    beta  = ""
+    beta  = "sg-fb60569e"
     prod  = ""
   }
 }
@@ -85,8 +81,7 @@ variable "sg-web-server" {
 variable "private_subnets" {
   default = {
     alpha = "subnet-5bd47870,subnet-942147e3,subnet-480d8911"
-    sit   = ""
-    beta  = ""
+    beta  = "subnet-a7756b8f,subnet-0b4d957c,subnet-49e21810"
     prod  = ""
   }
 }
@@ -94,7 +89,6 @@ variable "private_subnets" {
 variable "on_demain_instance_type" {
   default = {
     alpha = "t2.medium"
-    sit   = "t2.medium"
     beta  = "t2.medium"
     prod  = "m3.large"
   }
@@ -104,8 +98,7 @@ variable "on_demain_asg_min" {
   description = "Min numbers of servers in ASG"
   default = {
     alpha = "0"
-    sit   = "0"
-    beta  = "0"
+    beta  = "1"
     prod  = "0"
   }
 }
@@ -114,8 +107,7 @@ variable "on_demain_asg_max" {
   description = "Max numbers of servers in ASG"
   default = {
     alpha = "0"
-    sit   = "0"
-    beta  = "0"
+    beta  = "1"
     prod  = "0"
   }
 }
@@ -124,8 +116,7 @@ variable "on_demain_asg_desired" {
   description = "Desired numbers of servers in ASG"
   default = {
     alpha = "0"
-    sit   = "0"
-    beta  = "0"
+    beta  = "1"
     prod  = "0"
   }
 }
@@ -133,7 +124,6 @@ variable "on_demain_asg_desired" {
 variable "on_demain_cwma_scaling_up_threshold" {
   default = {
     alpha = "100"
-    sit   = "75"
     beta  = "75"
     prod  = "75"
   }
@@ -142,7 +132,6 @@ variable "on_demain_cwma_scaling_up_threshold" {
 variable "on_demain_cwma_scaling_down_threshold" {
   default = {
     alpha = "0"
-    sit   = "0"
     beta  = "0"
     prod  = "0"
   }
@@ -151,7 +140,6 @@ variable "on_demain_cwma_scaling_down_threshold" {
 variable "spot_instance_type" {
   default = {
     alpha = "m4.large"
-    sit   = "t2.medium"
     beta  = "t2.medium"
     prod  = "m4.large"
   }
@@ -160,8 +148,7 @@ variable "spot_instance_type" {
 variable "spot_asg_min" {
   description = "Min numbers of servers in ASG"
   default = {
-    alpha = "1"
-    sit   = "0"
+    alpha = "2"
     beta  = "0"
     prod  = "0"
   }
@@ -170,8 +157,7 @@ variable "spot_asg_min" {
 variable "spot_asg_max" {
   description = "Max numbers of servers in ASG"
   default = {
-    alpha = "1"
-    sit   = "0"
+    alpha = "6"
     beta  = "0"
     prod  = "0"
   }
@@ -180,8 +166,7 @@ variable "spot_asg_max" {
 variable "spot_asg_desired" {
   description = "Desired numbers of servers in ASG"
   default = {
-    alpha = "1"
-    sit   = "0"
+    alpha = "2"
     beta  = "0"
     prod  = "0"
   }
@@ -190,7 +175,6 @@ variable "spot_asg_desired" {
 variable "spot_price" {
   default = {
     alpha = "0.035"
-    sit   = "0.01"
     beta  = "0.01"
     prod  = "0.030"
   }
@@ -199,7 +183,6 @@ variable "spot_price" {
 variable "spot_cwma_scaling_up_threshold" {
   default = {
     alpha = "75"
-    sit   = "100"
     beta  = "100"
     prod  = "100"
   }
@@ -208,8 +191,84 @@ variable "spot_cwma_scaling_up_threshold" {
 variable "spot_cwma_scaling_down_threshold" {
   default = {
     alpha = "40"
-    sit   = "0"
     beta  = "0"
     prod  = "0"
   }
+}
+
+
+
+# --------------------------------- #
+# - Module: ecs-service-alexa-bot - #
+# --------------------------------- #
+
+variable "alexa_bot_revision" {
+  default = {
+    alpha = "develop"
+    beta  = "master"
+    prod  = "latest"
+  }
+}
+
+variable "alexa_bot_memory" {
+  default = {
+    alpha = "1996"
+    beta  = "1996"
+    prod  = "1500"
+  }
+}
+
+variable "alexa_bot_cpu" {
+  default = {
+    alpha = "512"
+    beta  = "512"
+    prod  = "450"
+  }
+}
+
+
+# For environments
+
+variable "serverless_project" {
+  default = "personal-cloud-alexa"
+}
+
+variable "debug" {
+  default = {
+    alpha = "true"
+    beta  = "true"
+    prod  = "false"
+  } 
+}
+
+variable "pcloud_api_domain" {
+  default = {
+    alpha = "https://api-mycloud-alpha.zyxel.ecoworkinc.com"
+    beta  = "https://api-mycloud-beta.zyxel.com"
+    prod  = "https://api-mycloud.zyxel.com"
+  }
+}
+
+variable "pcloud_xmpp_host" {
+  default = {
+    alpha = "alpha.xmpp.zyxel.com"
+    beta  = "beta.xmpp.zyxel.com"
+    prod  = "xmpp.zyxel.com"
+  }
+}
+
+variable "pcloud_register_v1_path" {
+  default = "/d/1/register"
+}
+
+variable "pcloud_magic_number" {
+  default = "5889"
+}
+
+variable "pcloud_web_redis_host" {
+  default = {
+    alpha = "pcloud-alpha-web-rg.yypz2x.ng.0001.use1.cache.amazonaws.com"
+    beta  = "pcloud-beta-web-rg.hcv1lh.ng.0001.use1.cache.amazonaws.com"
+    prod  = "pcloud-prod-web-rg.hcv1lh.ng.0001.use1.cache.amazonaws.com"
+  } 
 }

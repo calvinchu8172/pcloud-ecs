@@ -10,6 +10,8 @@ resource "aws_ecs_cluster" "main" {
   name = "${var.project}-${var.env}"
 }
 
+data "aws_caller_identity" "current" {}
+
 module "lc-asg" {
   source                                = "modules/lc-asg"
   project_name                          = "${var.project}-${var.env}"
@@ -37,3 +39,31 @@ module "lc-asg" {
   spot_cwma_scaling_up_threshold        = "${lookup(var.spot_cwma_scaling_up_threshold, var.env)}"
   spot_cwma_scaling_down_threshold      = "${lookup(var.spot_cwma_scaling_down_threshold, var.env)}"
 }
+
+
+module "ecs-service-alexa-bot" {
+  source                = "modules/ecs-service-alexa-bot"
+  env                   = "${var.env}"
+  region                = "${var.region}"
+  current_account_id    = "${data.aws_caller_identity.current.account_id}"
+  cluster_name          = "${aws_ecs_cluster.main.name}"
+  cluster_id            = "${aws_ecs_cluster.main.id}"
+  service_name          = "${var.project}-alexa-go-bot"
+  family                = "${var.project}-${var.env}-alexa-go-bot"
+  log_group_name        = "/aws/ecs/${var.project}-${var.env}-alexa-go-bot"
+  alexa_bot_revision    = "${lookup(var.alexa_bot_revision, var.env)}"
+  alexa_bot_memory      = 1996
+  alexa_bot_cpu         = 512
+  service_desired_count = "1"
+  host_port             = 5280
+  container_port        = 5280
+
+  serverless_project      = "${var.serverless_project}"
+  debug                   = "${lookup(var.debug, var.env)}"
+  pcloud_api_domain       = "${lookup(var.pcloud_api_domain, var.env)}"
+  pcloud_xmpp_host        = "${lookup(var.pcloud_xmpp_host, var.env)}"    
+  pcloud_register_v1_path = "${var.pcloud_register_v1_path}"    
+  pcloud_magic_number     = "${var.pcloud_magic_number}"
+  pcloud_web_redis_host   = "${lookup(var.pcloud_web_redis_host, var.env)}"
+}
+    

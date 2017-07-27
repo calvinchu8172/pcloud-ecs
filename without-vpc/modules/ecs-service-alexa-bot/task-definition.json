@@ -1,0 +1,90 @@
+[
+  {
+    "volumesFrom": [],
+    "memory": ${alexa_bot_memory},
+    "extraHosts": null,
+    "dnsServers": null,
+    "disableNetworking": null,
+    "dnsSearchDomains": null,
+    "portMappings": [
+      {
+        "hostPort": ${host_port},
+        "containerPort": ${container_port},
+        "protocol": "tcp"
+      }
+    ],
+    "hostname": null,
+    "essential": true,
+    "entryPoint": null,
+    "mountPoints": [],
+    "name": "${family}",
+    "ulimits": null,
+    "dockerSecurityOptions": null,
+    "environment": [
+      {
+        "name": "SERVICE",
+        "value": "${serverless_project}"
+      },
+      {
+        "name": "REGION",
+        "value": "${region}"
+      },
+      {
+        "name": "AWS_REGION",
+        "value": "${region}"
+      },
+      {
+        "name": "STAGE",
+        "value": "${env}"
+      },
+      {
+        "name": "DEBUG",
+        "value": "${debug}"
+      },
+      {
+        "name": "API_DOMAIN",
+        "value": "${pcloud_api_domain}"
+      },
+      {
+        "name": "XMPP_HOST",
+        "value": "${pcloud_xmpp_host}"
+      },
+      {
+        "name": "REGISTER_API_PATH",
+        "value": "${pcloud_register_v1_path}"
+      },
+      {
+        "name": "MAGIC_NUMBER",
+        "value": "${pcloud_magic_number}"
+      },
+      {
+        "name": "MESSAGE_QUEUE_NAME",
+        "value": "${serverless_project}-${env}-messages"
+      },
+      {
+        "name": "REDIS_HOST",
+        "value": "${pcloud_web_redis_host}"
+      },
+      {
+        "name": "ROLE_ARN",
+        "value": "arn:aws:iam::${current_account_id}:role/${serverless_project}-${env}-${region}-alexaGoBotRole"
+      }
+    ],
+    "links": null,
+    "workingDirectory": null,
+    "readonlyRootFilesystem": null,
+    "image": "683422241496.dkr.ecr.us-east-1.amazonaws.com/${service_name}:${alexa_bot_revision}",
+    "command": null,
+    "user": null,
+    "dockerLabels": null,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${region}"
+      }
+    },
+    "cpu": ${alexa_bot_cpu},
+    "privileged": null
+  }
+]
