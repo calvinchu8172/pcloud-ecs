@@ -7,11 +7,6 @@
     "disableNetworking": null,
     "dnsSearchDomains": null,
     "portMappings": [
-      {
-        "hostPort": ${host_port},
-        "containerPort": ${container_port},
-        "protocol": "tcp"
-      }
     ],
     "hostname": null,
     "essential": true,

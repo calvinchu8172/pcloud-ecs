@@ -52,9 +52,9 @@ module "ecs-service-alexa-bot" {
   family                = "${var.project}-${var.env}-alexa-go-bot"
   log_group_name        = "/aws/ecs/${var.project}-${var.env}-alexa-go-bot"
   alexa_bot_revision    = "${lookup(var.alexa_bot_revision, var.env)}"
-  alexa_bot_memory      = 1996
-  alexa_bot_cpu         = 512
-  service_desired_count = "1"
+  alexa_bot_memory      = "${lookup(var.alexa_bot_memory, var.env)}"
+  alexa_bot_cpu         = "${lookup(var.alexa_bot_cpu, var.env)}"
+  service_desired_count = "${lookup(var.alexa_bot_service_desired_count, var.env)}"
   host_port             = 5280
   container_port        = 5280
 

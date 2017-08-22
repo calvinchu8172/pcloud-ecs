@@ -57,7 +57,7 @@ variable "iam_instance_profile" {
   default = {
     alpha = "pcloud_alpha"
     beta  = "pcloud_beta"
-    prod  = ""
+    prod  = "pcloud_production"
   }
 }
 
@@ -66,7 +66,7 @@ variable "key_name" {
   default = {
     alpha = "pcloud-alpha-201706301731"
     beta  = "pcloud-beta-201707271147"
-    prod  = ""
+    prod  = "pcloud-prod-201708091430"
   }
 }
 
@@ -74,7 +74,7 @@ variable "sg-web-server" {
   default = {
     alpha = "sg-16cf5d72"
     beta  = "sg-fb60569e"
-    prod  = ""
+    prod  = "sg-21487e44"
   }
 }
 
@@ -82,7 +82,7 @@ variable "private_subnets" {
   default = {
     alpha = "subnet-5bd47870,subnet-942147e3,subnet-480d8911"
     beta  = "subnet-a7756b8f,subnet-0b4d957c,subnet-49e21810"
-    prod  = ""
+    prod  = "subnet-29756b01,subnet-7804da0f,subnet-a9926af0"
   }
 }
 
@@ -90,34 +90,34 @@ variable "on_demain_instance_type" {
   default = {
     alpha = "t2.medium"
     beta  = "t2.medium"
-    prod  = "m3.large"
+    prod  = "t2.medium"
   }
 }
 
 variable "on_demain_asg_min" {
   description = "Min numbers of servers in ASG"
   default = {
-    alpha = "0"
+    alpha = "1"
     beta  = "1"
-    prod  = "0"
+    prod  = "1"
   }
 }
 
 variable "on_demain_asg_max" {
   description = "Max numbers of servers in ASG"
   default = {
-    alpha = "0"
+    alpha = "1"
     beta  = "1"
-    prod  = "0"
+    prod  = "1"
   }
 }
 
 variable "on_demain_asg_desired" {
   description = "Desired numbers of servers in ASG"
   default = {
-    alpha = "0"
+    alpha = "1"
     beta  = "1"
-    prod  = "0"
+    prod  = "1"
   }
 }
 
@@ -139,7 +139,7 @@ variable "on_demain_cwma_scaling_down_threshold" {
 
 variable "spot_instance_type" {
   default = {
-    alpha = "m4.large"
+    alpha = "t2.medium"
     beta  = "t2.medium"
     prod  = "m4.large"
   }
@@ -148,7 +148,7 @@ variable "spot_instance_type" {
 variable "spot_asg_min" {
   description = "Min numbers of servers in ASG"
   default = {
-    alpha = "2"
+    alpha = "1"
     beta  = "0"
     prod  = "0"
   }
@@ -166,7 +166,7 @@ variable "spot_asg_max" {
 variable "spot_asg_desired" {
   description = "Desired numbers of servers in ASG"
   default = {
-    alpha = "2"
+    alpha = "1"
     beta  = "0"
     prod  = "0"
   }
@@ -206,26 +206,34 @@ variable "alexa_bot_revision" {
   default = {
     alpha = "develop"
     beta  = "master"
-    prod  = "latest"
+    prod  = "master"
   }
 }
 
 variable "alexa_bot_memory" {
   default = {
-    alpha = "1996"
-    beta  = "1996"
-    prod  = "1500"
+    alpha = "1950"
+    beta  = "1950"
+    prod  = "1950"
   }
 }
 
 variable "alexa_bot_cpu" {
   default = {
-    alpha = "512"
-    beta  = "512"
-    prod  = "450"
+    alpha = "1024"
+    beta  = "1024"
+    prod  = "512"
   }
 }
 
+
+variable "alexa_bot_service_desired_count" {
+  default = {
+    alpha = "2"
+    beta  = "2"
+    prod  = "4"
+  } 
+}
 
 # For environments
 
@@ -237,7 +245,7 @@ variable "debug" {
   default = {
     alpha = "true"
     beta  = "true"
-    prod  = "false"
+    prod  = "true"
   } 
 }
 
