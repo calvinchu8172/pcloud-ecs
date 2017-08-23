@@ -16,6 +16,14 @@ variable "project" {
 # - Module: VPC - #
 # --------------- #
 
+variable "vpc_id" {
+  default = {
+    alpha = "vpc-d2450fb7"
+    beta  = "vpc-ed6dd288"
+    prod  = "vpc-196dd27c"
+  }
+}
+
 variable "vpc_cidr_block" {
   default = {
     alpha = "10.112"
@@ -62,10 +70,10 @@ variable "subspace" {
 # - Module: lc-asg - #
 # ------------------ #
 
-# amzn-ami-2017.03.d-amazon-ecs-optimized
+# amzn-ami-2017.03.e-amazon-ecs-optimized
 variable "amis" {
   default = {
-    us-east-1 = "ami-04351e12"
+    us-east-1 = "ami-d61027ad"
   }
 }
 
@@ -147,8 +155,8 @@ variable "on_demain_cwma_scaling_down_threshold" {
 
 variable "spot_instance_type" {
   default = {
-    alpha = "t2.medium"
-    beta  = "t2.medium"
+    alpha = "m4.large"
+    beta  = "m4.large"
     prod  = "m4.large"
   }
 }
@@ -156,7 +164,7 @@ variable "spot_instance_type" {
 variable "spot_asg_min" {
   description = "Min numbers of servers in ASG"
   default = {
-    alpha = "1"
+    alpha = "3"
     beta  = "0"
     prod  = "0"
   }
@@ -174,7 +182,7 @@ variable "spot_asg_max" {
 variable "spot_asg_desired" {
   description = "Desired numbers of servers in ASG"
   default = {
-    alpha = "1"
+    alpha = "3"
     beta  = "0"
     prod  = "0"
   }
@@ -312,5 +320,81 @@ variable "pcloud_web_redis_host" {
     alpha = "pcloud-alpha-web-rg.yypz2x.ng.0001.use1.cache.amazonaws.com"
     beta  = "pcloud-beta-web-rg.hcv1lh.ng.0001.use1.cache.amazonaws.com"
     prod  = "pcloud-prod-web-rg.hcv1lh.ng.0001.use1.cache.amazonaws.com"
+  }
+}
+
+# --------------------------------- #
+# - Module: ecs-service-rails-app - #
+# --------------------------------- #
+
+variable "rails_app_memory" {
+  default = {
+    alpha = "1500"
+    beta  = "1600"
+    prod  = "1500"
+  }
+}
+
+variable "rails_app_cpu" {
+  default = {
+    alpha = "450"
+    beta  = "900"
+    prod  = "450"
+  }
+}
+
+variable "rails_config_memory" {
+  default = {
+    alpha = "70"
+    beta  = "70"
+    prod  = "70"
+  }
+}
+
+variable "rails_config_cpu" {
+  default = {
+    alpha = "12"
+    beta  = "24"
+    prod  = "12"
+  }
+}
+
+variable "rails_log_memory" {
+  default = {
+    alpha = "300"
+    beta  = "300"
+    prod  = "300"
+  }
+}
+
+variable "rails_log_cpu" {
+  default = {
+    alpha = "50"
+    beta  = "100"
+    prod  = "50"
+  }
+}
+
+# ---------- #
+# - Config - #
+# ---------- #
+
+variable "config_revision" {
+  default = {
+    alpha = "develop"
+    beta  = "1.0.0"
+    prod  = "1.0.0"
+  }
+}
+
+# ----------- #
+# - Console - #
+# ----------- #
+
+variable "console_revision" {
+  default = {
+    alpha = "develop"
+    beta  = "2.12.0"
+    prod  = "2.12.0"
   }
 }

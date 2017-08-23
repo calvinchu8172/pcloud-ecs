@@ -54,7 +54,7 @@ module "alb" {
 module "alb-tg-console" {
   source        = "modules/alb-tg"
   name          = "${var.project}-${var.env}-console"
-  vpc_id        = "${lookup(var.vpc_id, var.env)}"
+  vpc_id        = "${module.vpc.id}"
   instance_port = 8086
 }
 
@@ -103,7 +103,6 @@ module "ecs-service-alexa-bot" {
 
 module "ecs-service-console" {
   source                = "modules/ecs-service-rails-app-alb"
-  project               = "${var.project}"
   env                   = "${var.env}"
   cluster_name          = "${aws_ecs_cluster.main.name}"
   service_name          = "${var.project}-console"
@@ -116,6 +115,7 @@ module "ecs-service-console" {
   rails_config_revision = "${lookup(var.config_revision, var.env)}"
   rails_config_memory   = "${lookup(var.rails_config_memory, var.env)}"
   rails_config_cpu      = "${lookup(var.rails_config_cpu, var.env)}"
+  rails_log_revision    = "latest"
   rails_log_memory      = "${lookup(var.rails_log_memory, var.env)}"
   rails_log_cpu         = "${lookup(var.rails_log_cpu, var.env)}"
   service_desired_count = "1"

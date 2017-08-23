@@ -21,13 +21,13 @@ data "template_file" "task-definition" {
     alexa_bot_cpu           = "${var.alexa_bot_cpu}"
     current_account_id      = "${var.current_account_id}"
     log_group_name          = "${var.log_group_name}"
-    
+
     # For environment
     serverless_project      = "${var.serverless_project}"
     debug                   = "${var.debug}"
     pcloud_api_domain       = "${var.pcloud_api_domain}"
-    pcloud_xmpp_host        = "${var.pcloud_xmpp_host}"    
-    pcloud_register_v1_path = "${var.pcloud_register_v1_path}"    
+    pcloud_xmpp_host        = "${var.pcloud_xmpp_host}"
+    pcloud_register_v1_path = "${var.pcloud_register_v1_path}"
     pcloud_magic_number     = "${var.pcloud_magic_number}"
     pcloud_web_redis_host   = "${var.pcloud_web_redis_host}"
   }

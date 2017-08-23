@@ -1,0 +1,120 @@
+[
+    {
+        "volumesFrom": [
+            {
+                "readOnly": null,
+                "sourceContainer": "rails-config"
+            },
+            {
+                "readOnly": null,
+                "sourceContainer": "rails-log"
+            }
+        ],
+        "memory": ${rails_app_memory},
+        "extraHosts": null,
+        "dnsServers": null,
+        "disableNetworking": null,
+        "dnsSearchDomains": null,
+        "portMappings": [
+            {
+                "hostPort": ${host_port},
+                "containerPort": ${container_port},
+                "protocol": "tcp"
+            }
+        ],
+        "hostname": null,
+        "essential": true,
+        "entryPoint": null,
+        "mountPoints": [],
+        "name": "rails-app",
+        "ulimits": null,
+        "dockerSecurityOptions": null,
+        "environment": [],
+        "links": null,
+        "workingDirectory": null,
+        "readonlyRootFilesystem": null,
+        "image": "683422241496.dkr.ecr.us-east-1.amazonaws.com/${service_name}:${rails_app_revision}",
+        "command": null,
+        "user": null,
+        "dockerLabels": null,
+        "logConfiguration": null,
+        "cpu": ${rails_app_cpu},
+        "privileged": null
+    },
+    {
+        "volumesFrom": [],
+        "memory": ${rails_config_memory},
+        "extraHosts": null,
+        "dnsServers": null,
+        "disableNetworking": null,
+        "dnsSearchDomains": null,
+        "portMappings": [],
+        "hostname": null,
+        "essential": true,
+        "entryPoint": null,
+        "mountPoints": [],
+        "name": "rails-config",
+        "ulimits": null,
+        "dockerSecurityOptions": null,
+        "environment": [
+            {
+                "name": "STACK_ENV",
+                "value": "${env}"
+            },
+            {
+                "name": "SERVICE_NAME",
+                "value": "${service_name}"
+            },
+            {
+                "name": "HOSTNAME",
+                "value": "${service_name}"
+            }
+        ],
+        "links": null,
+        "workingDirectory": null,
+        "readonlyRootFilesystem": null,
+        "image": "683422241496.dkr.ecr.us-east-1.amazonaws.com/${project}-config:${rails_config_revision}",
+        "command": null,
+        "user": null,
+        "dockerLabels": null,
+        "logConfiguration": null,
+        "cpu": ${rails_config_cpu},
+        "privileged": null
+    },
+    {
+        "volumesFrom": [],
+        "memory": ${rails_log_memory},
+        "extraHosts": null,
+        "dnsServers": null,
+        "disableNetworking": null,
+        "dnsSearchDomains": null,
+        "portMappings": [],
+        "hostname": null,
+        "essential": true,
+        "entryPoint": null,
+        "mountPoints": [],
+        "name": "rails-log",
+        "ulimits": null,
+        "dockerSecurityOptions": null,
+        "environment": [
+            {
+                "name": "AWS_ECS_CLUSTER_NAME",
+                "value": "${cluster_name}"
+            },
+            {
+                "name": "AWS_ECS_SERVICE_NAME",
+                "value": "${service_name}"
+            }
+        ],
+        "links": null,
+        "workingDirectory": null,
+        "readonlyRootFilesystem": null,
+        "image": "683422241496.dkr.ecr.us-east-1.amazonaws.com/rails-passenger-log:latest",
+        "command": null,
+        "user": null,
+        "dockerLabels": null,
+        "logConfiguration": null,
+        "cpu": ${rails_log_cpu},
+        "privileged": null
+    }
+]
