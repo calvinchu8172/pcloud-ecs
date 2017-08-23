@@ -61,9 +61,23 @@ module "ecs-service-alexa-bot" {
   serverless_project      = "${var.serverless_project}"
   debug                   = "${lookup(var.debug, var.env)}"
   pcloud_api_domain       = "${lookup(var.pcloud_api_domain, var.env)}"
-  pcloud_xmpp_host        = "${lookup(var.pcloud_xmpp_host, var.env)}"    
-  pcloud_register_v1_path = "${var.pcloud_register_v1_path}"    
+  pcloud_xmpp_host        = "${lookup(var.pcloud_xmpp_host, var.env)}"
+  pcloud_register_v1_path = "${var.pcloud_register_v1_path}"
   pcloud_magic_number     = "${var.pcloud_magic_number}"
   pcloud_web_redis_host   = "${lookup(var.pcloud_web_redis_host, var.env)}"
 }
-    
+
+# ------- #
+# - ALB - #
+# ------- #
+
+module "alb" {
+  source             = "modules/alb"
+  project_name       = "${var.project}-${var.env}"
+  creator            = "${var.creator}"
+  name               = "${var.project}-${var.env}"
+  subnets            = "${lookup(var.public_subnets, var.env)}"
+  access_logs_bucket = "${lookup(var.access_logs_bucket, var.env)}"
+  access_logs_prefix = "${lookup(var.access_logs_prefix, var.env)}"
+  security_groups    = "${lookup(var.elb_sg, var.env)}"
+}

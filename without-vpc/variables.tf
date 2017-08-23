@@ -31,6 +31,22 @@ variable "vpc_availability_zone" {
   }
 }
 
+variable "private_subnets" {
+  default = {
+    alpha = "subnet-5bd47870,subnet-942147e3,subnet-480d8911"
+    beta  = "subnet-a7756b8f,subnet-0b4d957c,subnet-49e21810"
+    prod  = "subnet-29756b01,subnet-7804da0f,subnet-a9926af0"
+  }
+}
+
+variable "public_subnets" {
+  default = {
+    alpha = "subnet-1a26406d,subnet-5cdd7177,subnet-ab0682f2"
+    beta  = "subnet-4a51893d,subnet-f5fae0dd,subnet-fff60ca6"
+    prod  = "subnet-08243c20,subnet-8d07d9fa,subnet-8e926ad7"
+  }
+}
+
 variable "subspace" {
   type = "map"
 
@@ -75,14 +91,6 @@ variable "sg-web-server" {
     alpha = "sg-16cf5d72"
     beta  = "sg-fb60569e"
     prod  = "sg-21487e44"
-  }
-}
-
-variable "private_subnets" {
-  default = {
-    alpha = "subnet-5bd47870,subnet-942147e3,subnet-480d8911"
-    beta  = "subnet-a7756b8f,subnet-0b4d957c,subnet-49e21810"
-    prod  = "subnet-29756b01,subnet-7804da0f,subnet-a9926af0"
   }
 }
 
@@ -196,7 +204,33 @@ variable "spot_cwma_scaling_down_threshold" {
   }
 }
 
+# ------- #
+# - ALB - #
+# ------- #
 
+variable "access_logs_bucket" {
+  default = {
+    alpha = "pcloud-aws-logs"
+    beta  = "personal-cloud-aws-logs"
+    prod  = "personal-cloud-aws-logs"
+  }
+}
+
+variable "access_logs_prefix" {
+  default = {
+    alpha = "elb/us-east-1/alpha"
+    beta  = "elb/us-east-1/beta"
+    prod  = "elb/us-east-1/prod"
+  }
+}
+
+variable "elb_sg" {
+  default = {
+    alpha = "sg-33f36157"
+    beta  = "sg-06b89063"
+    prod  = "sg-aca78fc9"
+  }
+}
 
 # --------------------------------- #
 # - Module: ecs-service-alexa-bot - #
@@ -232,7 +266,7 @@ variable "alexa_bot_service_desired_count" {
     alpha = "2"
     beta  = "2"
     prod  = "4"
-  } 
+  }
 }
 
 # For environments
@@ -246,7 +280,7 @@ variable "debug" {
     alpha = "true"
     beta  = "true"
     prod  = "true"
-  } 
+  }
 }
 
 variable "pcloud_api_domain" {
@@ -278,5 +312,5 @@ variable "pcloud_web_redis_host" {
     alpha = "pcloud-alpha-web-rg.yypz2x.ng.0001.use1.cache.amazonaws.com"
     beta  = "pcloud-beta-web-rg.hcv1lh.ng.0001.use1.cache.amazonaws.com"
     prod  = "pcloud-prod-web-rg.hcv1lh.ng.0001.use1.cache.amazonaws.com"
-  } 
+  }
 }
