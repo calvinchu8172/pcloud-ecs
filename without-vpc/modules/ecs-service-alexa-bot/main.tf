@@ -42,6 +42,7 @@ data "aws_ecs_task_definition" "alexa-bot" {
 resource "aws_ecs_task_definition" "alexa-bot" {
   family                = "${var.family}"
   container_definitions = "${data.template_file.task-definition.rendered}"
+  task_role_arn         = "arn:aws:iam::${var.current_account_id}:role/pcloud-alexa-${var.env}-${var.region}-alexaGoBotRole"
 }
 
 resource "aws_ecs_service" "alexa-bot" {

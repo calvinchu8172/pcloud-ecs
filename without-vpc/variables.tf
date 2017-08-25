@@ -115,7 +115,7 @@ variable "on_demain_asg_min" {
   default = {
     alpha = "1"
     beta  = "1"
-    prod  = "1"
+    prod  = "2"
   }
 }
 
@@ -124,7 +124,7 @@ variable "on_demain_asg_max" {
   default = {
     alpha = "1"
     beta  = "1"
-    prod  = "1"
+    prod  = "2"
   }
 }
 
@@ -133,7 +133,7 @@ variable "on_demain_asg_desired" {
   default = {
     alpha = "1"
     beta  = "1"
-    prod  = "1"
+    prod  = "2"
   }
 }
 
