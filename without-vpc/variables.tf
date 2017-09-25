@@ -115,7 +115,7 @@ variable "on_demain_asg_min" {
   default = {
     alpha = "1"
     beta  = "1"
-    prod  = "2"
+    prod  = "4"
   }
 }
 
@@ -124,7 +124,7 @@ variable "on_demain_asg_max" {
   default = {
     alpha = "1"
     beta  = "1"
-    prod  = "2"
+    prod  = "6"
   }
 }
 
@@ -133,7 +133,7 @@ variable "on_demain_asg_desired" {
   default = {
     alpha = "1"
     beta  = "1"
-    prod  = "2"
+    prod  = "4"
   }
 }
 
@@ -331,7 +331,7 @@ variable "rails_app_memory" {
   default = {
     alpha = "1500"
     beta  = "1600"
-    prod  = "1500"
+    prod  = "1600"
   }
 }
 
@@ -339,7 +339,7 @@ variable "rails_app_cpu" {
   default = {
     alpha = "450"
     beta  = "900"
-    prod  = "450"
+    prod  = "900"
   }
 }
 
@@ -355,7 +355,7 @@ variable "rails_config_cpu" {
   default = {
     alpha = "12"
     beta  = "24"
-    prod  = "12"
+    prod  = "24"
   }
 }
 
@@ -371,7 +371,7 @@ variable "rails_log_cpu" {
   default = {
     alpha = "50"
     beta  = "100"
-    prod  = "50"
+    prod  = "100"
   }
 }
 
