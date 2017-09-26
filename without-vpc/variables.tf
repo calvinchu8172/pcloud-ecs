@@ -114,7 +114,7 @@ variable "on_demain_asg_min" {
   description = "Min numbers of servers in ASG"
   default = {
     alpha = "1"
-    beta  = "1"
+    beta  = "3"
     prod  = "4"
   }
 }
@@ -123,7 +123,7 @@ variable "on_demain_asg_max" {
   description = "Max numbers of servers in ASG"
   default = {
     alpha = "1"
-    beta  = "1"
+    beta  = "6"
     prod  = "6"
   }
 }
@@ -132,7 +132,7 @@ variable "on_demain_asg_desired" {
   description = "Desired numbers of servers in ASG"
   default = {
     alpha = "1"
-    beta  = "1"
+    beta  = "3"
     prod  = "4"
   }
 }
@@ -394,7 +394,7 @@ variable "config_revision" {
 variable "console_revision" {
   default = {
     alpha = "develop"
-    beta  = "2.12.0"
+    beta  = "2.13.0"
     prod  = "2.12.0"
   }
 }
