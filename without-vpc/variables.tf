@@ -395,6 +395,6 @@ variable "console_revision" {
   default = {
     alpha = "develop"
     beta  = "2.13.0"
-    prod  = "2.12.0"
+    prod  = "2.13.0"
   }
 }
